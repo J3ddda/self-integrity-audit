@@ -11,7 +11,7 @@
       font-family: 'Open Sans', sans-serif;
       background-color: #1e1e1e;
       color: #dddddd;
-      max-width: 700px;
+      max-width: 960px;
       margin: 48px auto;
       padding: 16px;
       line-height: 1.7;
@@ -38,10 +38,20 @@
       margin-bottom: 32px;
     }
 
+    .questions-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 24px;
+      margin-top: 32px;
+    }
+
     .question {
-      margin: 28px 0;
+      flex: 1 1 calc(33% - 24px);
+      min-width: 280px;
       padding-left: 16px;
       border-left: 3px solid #9aaaff;
+      margin: 0;
     }
 
     .question span {
@@ -56,20 +66,51 @@
       color: #aaaaaa;
     }
 
-    footer {
-      margin-top: 48px;
-      text-align: center;
+    .answers {
+      margin-top: 8px;
+    }
+
+    .answers button {
+      margin-right: 8px;
+      padding: 6px 14px;
       font-size: 14px;
-      color: #999999;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      background-color: #bbbbbb;
+      color: #000;
+      transition: background-color 0.2s;
     }
 
-    a {
-      color: #9aaaff;
-      text-decoration: none;
+    .answers button:hover {
+      background-color: #999999;
     }
 
-    a:hover {
-      text-decoration: underline;
+    body.light-mode h1 {
+      color: #4c4cff;
+    }
+
+    body.light-mode .question {
+      border-left-color: #4c4cff;
+    }
+
+    body.light-mode .question span {
+      color: #4c4cff;
+    }
+
+    body.light-mode h2,
+    body.light-mode em,
+    body.light-mode footer {
+      color: #777777;
+    }
+
+    body.light-mode .answers button {
+      background-color: #4c4cff;
+      color: white;
+    }
+
+    body.light-mode .answers button:hover {
+      background-color: #3737d3;
     }
 
     #mode-toggle {
@@ -89,20 +130,6 @@
       background-color: #bbbbbb;
     }
 
-    body.light-mode h1 {
-      color: #4c4cff;
-    }
-
-    body.light-mode .question span {
-      color: #4c4cff;
-    }
-
-    body.light-mode h2,
-    body.light-mode em,
-    body.light-mode footer {
-      color: #777777;
-    }
-
     body.light-mode #mode-toggle {
       background-color: #4c4cff;
       color: white;
@@ -112,59 +139,38 @@
       background-color: #3737d3;
     }
 
-    .questions-wrapper {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 24px;
-      margin-top: 32px;
+    #result {
+      margin-top: 48px;
+      text-align: center;
+      font-size: 18px;
     }
-  
-    .question {
-      flex: 1 1 calc(33% - 24px);
-      min-width: 260px;
-      padding-left: 16px;
-      border-left: 3px solid #9aaaff;
-      margin: 0;
+
+    footer {
+      margin-top: 48px;
+      text-align: center;
+      font-size: 14px;
+      color: #999999;
     }
-  
-    .question span {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 6px;
-      color: #9aaaff;
+
+    .heart {
+      transition: color 0.3s ease;
     }
-  
-    body.light-mode .question {
-      border-left-color: #4c4cff;
+
+    body.dark-mode .heart {
+      color: #ffffff;
     }
-  
-    body.light-mode .question span {
-      color: #4c4cff;
+
+    body.light-mode .heart {
+      color: #000000;
     }
-  
+
     @media (max-width: 768px) {
       .question {
         flex: 1 1 100%;
       }
     }
-
-    .heart {
-  transition: color 0.3s ease;
-    }
-
-    body.dark-mode .heart {
-  color: white;
-    }
-
-    body.light-mode .heart {
-  color: #000000;
-    }
-
   </style>
 </head>
-
-
 <body>
 
   <button id="mode-toggle">Toggle Light Mode</button>
@@ -172,42 +178,71 @@
   <h1>🧭 Self-Integrity Audit Tool</h1>
   <h2>Check-in questions to stay grounded in your truth</h2>
 
-  <p>This tool helps you reflect on whether a dynamic is supporting your clarity and self-respect—or subtly undermining it. Use these questions whenever you feel emotionally foggy, confused, or overexposed.</p>
+  <p style="text-align: center;">
+    Answer each question honestly. This tool helps surface potential red flags in personal, professional, or intellectual dynamics.
+  </p>
+
   <div class="questions-wrapper">
-  <div class="question">
-    <span>1. Clarity</span>
-    “Am I thinking more clearly <em>after</em> I interact with this person… or less?”
+    <div class="question">
+      <span>1. Clarity</span>
+      “Am I thinking more clearly <em>after</em> I interact with this person… or less?”
+      <div class="answers">
+        <button onclick="handleAnswer(0, true)">Yes</button>
+        <button onclick="handleAnswer(0, false)">No</button>
+      </div>
+    </div>
+
+    <div class="question">
+      <span>2. Voice</span>
+      “Do I feel more able to express my full self with this person… or more cautious?”
+      <div class="answers">
+        <button onclick="handleAnswer(1, true)">Yes</button>
+        <button onclick="handleAnswer(1, false)">No</button>
+      </div>
+    </div>
+
+    <div class="question">
+      <span>3. Sovereignty</span>
+      “Are my choices expanding—or am I being steered toward <em>one</em> ‘right’ path?”
+      <div class="answers">
+        <button onclick="handleAnswer(2, true)">Yes</button>
+        <button onclick="handleAnswer(2, false)">No</button>
+      </div>
+    </div>
+
+    <div class="question">
+      <span>4. Feedback Loop</span>
+      “Can I question or challenge this person openly without punishment or guilt?”
+      <div class="answers">
+        <button onclick="handleAnswer(3, true)">Yes</button>
+        <button onclick="handleAnswer(3, false)">No</button>
+      </div>
+    </div>
+
+    <div class="question">
+      <span>5. Energy</span>
+      “Do I feel consistently drained, indebted, or overexposed after we connect?”
+      <div class="answers">
+        <button onclick="handleAnswer(4, true)">Yes</button>
+        <button onclick="handleAnswer(4, false)">No</button>
+      </div>
+    </div>
+
+    <div class="question">
+      <span>6. Truth Test</span>
+      “If I pull back and imagine them having <em>zero power or knowledge</em> — do I still trust their motives?”
+      <div class="answers">
+        <button onclick="handleAnswer(5, true)">Yes</button>
+        <button onclick="handleAnswer(5, false)">No</button>
+      </div>
+    </div>
   </div>
 
-  <div class="question">
-    <span>2. Voice</span>
-    “Do I feel more able to express my full self with this person… or more cautious?”
-  </div>
+  <div id="result"></div>
 
-  <div class="question">
-    <span>3. Sovereignty</span>
-    “Are my choices expanding—or am I being steered toward <em>one</em> ‘right’ path?”
-  </div>
-
-  <div class="question">
-    <span>4. Feedback Loop</span>
-    “Can I question or challenge this person openly without punishment or guilt?”
-  </div>
-
-  <div class="question">
-    <span>5. Energy</span>
-    “Do I feel consistently drained, indebted, or overexposed after we connect?”
-  </div>
-
-  <div class="question">
-    <span>6. Truth Test</span>
-    “If I pull back and imagine them having <em>zero power or knowledge</em> — do I still trust their motives?”
-  </div>
-</div>
-
-    <footer>
- Created for those reclaiming clarity. Share freely. <span class="heart">🖤</span>
- </footer>
+  <footer>
+    Created for those reclaiming clarity. Share freely. <span class="heart">🖤</span>
+  </footer>
 
   <script>
     const toggleButton = document.getElementById('mode-toggle');
@@ -217,8 +252,36 @@
         ? 'Toggle Dark Mode'
         : 'Toggle Light Mode';
     });
+
+    const answers = Array(6).fill(null);
+
+    function handleAnswer(index, value) {
+      answers[index] = value;
+      updateScore();
+    }
+
+    function updateScore() {
+      const count = answers.filter(Boolean).length;
+      const totalAnswered = answers.filter(a => a !== null).length;
+
+      let feedback = '';
+      if (totalAnswered < 6) {
+        feedback = `📝 You’ve answered ${totalAnswered}/6 questions.`;
+      } else if (count === 0) {
+        feedback = "✅ No red flags detected — this dynamic seems solid.";
+      } else if (count < 3) {
+        feedback = `⚠️ ${count}/6 red flags. Trust your gut and stay curious.`;
+      } else if (count < 6) {
+        feedback = `🚩 ${count}/6 red flags. Something may be misaligned. Reflect deeper.`;
+      } else {
+        feedback = `🛑 All 6 raised red flags. Proceed with high caution.`;
+      }
+
+      document.getElementById('result').innerHTML = feedback;
+    }
   </script>
 
 </body>
 </html>
+
 
