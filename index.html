@@ -4,27 +4,35 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Self-Integrity Audit Tool</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
   <style>
     body {
-      font-family: Georgia, serif;
-      background-color: #ffffff;
-      color: #222222;
+      font-family: 'Open Sans', sans-serif;
+      background-color: #1e1e1e;
+      color: #dddddd;
       max-width: 700px;
       margin: 48px auto;
       padding: 16px;
       line-height: 1.7;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    body.light-mode {
+      background-color: #ffffff;
+      color: #222222;
     }
 
     h1 {
       font-size: 35px;
       text-align: center;
-      color: #4c4cff;
+      color: #9aaaff;
       margin-bottom: 8px;
     }
 
     h2 {
       text-align: center;
-      color: #777777;
+      color: #aaaaaa;
       font-weight: normal;
       font-size: 19px;
       margin-bottom: 32px;
@@ -33,19 +41,19 @@
     .question {
       margin: 28px 0;
       padding-left: 16px;
-      border-left: 3px solid #4c4cff;
+      border-left: 3px solid #9aaaff;
     }
 
     .question span {
       display: block;
       font-weight: bold;
       margin-bottom: 6px;
-      color: #4c4cff;
+      color: #9aaaff;
     }
 
     em {
       font-style: italic;
-      color: #777777;
+      color: #aaaaaa;
     }
 
     footer {
@@ -56,22 +64,116 @@
     }
 
     a {
-      color: #4c4cff;
+      color: #9aaaff;
       text-decoration: none;
     }
 
     a:hover {
       text-decoration: underline;
     }
+
+    #mode-toggle {
+      display: block;
+      margin: 0 auto 24px auto;
+      padding: 8px 16px;
+      background-color: #dddddd;
+      color: #000;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #mode-toggle:hover {
+      background-color: #bbbbbb;
+    }
+
+    body.light-mode h1 {
+      color: #4c4cff;
+    }
+
+    body.light-mode .question span {
+      color: #4c4cff;
+    }
+
+    body.light-mode h2,
+    body.light-mode em,
+    body.light-mode footer {
+      color: #777777;
+    }
+
+    body.light-mode #mode-toggle {
+      background-color: #4c4cff;
+      color: white;
+    }
+
+    body.light-mode #mode-toggle:hover {
+      background-color: #3737d3;
+    }
+
+    .questions-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 24px;
+      margin-top: 32px;
+    }
+  
+    .question {
+      flex: 1 1 calc(33% - 24px);
+      min-width: 260px;
+      padding-left: 16px;
+      border-left: 3px solid #9aaaff;
+      margin: 0;
+    }
+  
+    .question span {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 6px;
+      color: #9aaaff;
+    }
+  
+    body.light-mode .question {
+      border-left-color: #4c4cff;
+    }
+  
+    body.light-mode .question span {
+      color: #4c4cff;
+    }
+  
+    @media (max-width: 768px) {
+      .question {
+        flex: 1 1 100%;
+      }
+    }
+
+    .heart {
+  transition: color 0.3s ease;
+    }
+
+    body.dark-mode .heart {
+  color: white;
+    }
+
+    body.light-mode .heart {
+  color: #000000;
+    }
+
   </style>
 </head>
+
+
 <body>
+
+  <button id="mode-toggle">Toggle Light Mode</button>
 
   <h1>🧭 Self-Integrity Audit Tool</h1>
   <h2>Check-in questions to stay grounded in your truth</h2>
 
   <p>This tool helps you reflect on whether a dynamic is supporting your clarity and self-respect—or subtly undermining it. Use these questions whenever you feel emotionally foggy, confused, or overexposed.</p>
-
+  <div class="questions-wrapper">
   <div class="question">
     <span>1. Clarity</span>
     “Am I thinking more clearly <em>after</em> I interact with this person… or less?”
@@ -101,10 +203,21 @@
     <span>6. Truth Test</span>
     “If I pull back and imagine them having <em>zero power or knowledge</em> — do I still trust their motives?”
   </div>
+</div>
 
-  <footer>
-    Created for those reclaiming clarity. Share freely. 🖤
-  </footer>
+    <footer>
+ Created for those reclaiming clarity. Share freely. <span class="heart">🖤</span>
+ </footer>
+
+  <script>
+    const toggleButton = document.getElementById('mode-toggle');
+    toggleButton.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      toggleButton.textContent = document.body.classList.contains('light-mode')
+        ? 'Toggle Dark Mode'
+        : 'Toggle Light Mode';
+    });
+  </script>
 
 </body>
 </html>
